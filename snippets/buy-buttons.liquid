@@ -94,11 +94,9 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
-          {%- endif -%}
           {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
-            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date | date: '%B, %d'
+            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
+              | date: '%B, %d'
             %}
             <div
               id="preorder-message"
