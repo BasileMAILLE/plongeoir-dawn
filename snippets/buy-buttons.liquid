@@ -96,6 +96,19 @@
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
+          {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
+            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
+              | date: '%B, %d'
+            %}
+            <div
+              id="preorder-message"
+              data-availability="{{ product.selected_or_first_available_variant.metafields.preorder.availability_date }}"
+            >
+              {{ 'products.product.preorder_availability' | t: availability_date: availability_date }}
+            </div>
+          {%- else -%}
+            <div id="preorder-message" style="display:none;"></div>
+          {%- endif -%}
         </div>
       {%- endform -%}
     </product-form>
