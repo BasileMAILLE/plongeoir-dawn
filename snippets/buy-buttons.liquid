@@ -55,7 +55,6 @@
           {% endif %}
           class="product-variant-id"
         >
-
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
@@ -97,8 +96,7 @@
             {{ form | payment_button }}
           {%- endif -%}
           {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
-            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
-              | date: '%B, %d'
+            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date | date: '%B, %d'
             %}
             <div
               id="preorder-message"

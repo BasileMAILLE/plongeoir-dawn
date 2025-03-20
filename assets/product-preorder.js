@@ -1,9 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Product-preorder.js loaded");
+  console.log("product-preorder.js loaded");
+  console.log(variants_metafields)
 
   const variantSelectors = document.querySelector("[name='id']");
+  const preorderMessage = document.getElementById("preorder-message");
+
+  if (!variantSelectors) return;
 
   variantSelectors.addEventListener("change", function (e) {
-    console.log("Variant selected", e.target.value);
-  });
+    if (variants_metafields[e.target.value]) {
+      let selectedVariant = variants_metafields[e.target.value];
+      let availabilityDate = selectedVariant.preorder.availability_message;
+
+      preorderMessage.innerText = availabilityDate;
+      preorderMessage.style.display = "block";
+    } else {
+      preorderMessage.style.display = "none";
+    }
+  }); 
+
 });
+

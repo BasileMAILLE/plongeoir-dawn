@@ -73,6 +73,23 @@
     >
   {%- endif -%}
 
+  {%- if product.variants.size > 1 -%}
+    <script>
+      const variants_metafields = {
+        {%- for variant in product.variants -%}
+          {%- if variant.metafields.preorder.availability_date -%}
+            {%- assign curr_variant_avail_date = variant.metafields.preorder.availability_date | date: '%B, %d' -%}
+            "{{ variant.id }}": {
+              preorder: {
+                availability_message: "{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}",
+              }
+            },
+          {%- endif -%}
+        {%- endfor -%}
+      }
+    </script>
+  {%- endif -%}
+
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
@@ -357,7 +374,10 @@
                                 </dt>
                                 <dd>
                                   <span class="price-per-item--current">
-                                    {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+                                    {{-
+                                      'products.product.volume_pricing.price_at_each_html'
+                                      | t: price: variant_price
+                                    -}}
                                   </span>
                                 </dd>
                               </dl>
@@ -1675,7 +1695,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_2",
@@ -1875,7 +1895,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_3.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_3",
@@ -2177,7 +2197,7 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
-    },    
+    },
     {
       "type": "select",
       "id": "media_position",
