@@ -107,6 +107,7 @@
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
+      "preorder-button": "Preorder now",
       "preorder_availability": "Shipping on {{ availability_date }}",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",

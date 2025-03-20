@@ -86,6 +86,8 @@
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
+              {% elsif product.selected_or_first_available_variant.metafields.preorder.availability_date %}
+                {{ 'products.product.preorder-button' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
