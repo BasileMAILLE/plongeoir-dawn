@@ -138,6 +138,20 @@
                               </div>
                             {%- endfor -%}
                           {%- endif -%}
+                          {% if item.variant.metafields.preorder.availability_date %}
+                            {% assign product_availability_date = item.variant.metafields.preorder.availability_date
+                              | date: '%B %m'
+                            %}
+                            <div class="preorder">
+                              <p class="cart-item__preorder-date">
+                                <span>{{ 'general.cart.preorder-label' | t }}</span>
+                                {{
+                                  'products.product.preorder_availability'
+                                  | t: availability_date: product_availability_date
+                                }}
+                              </p>
+                            </div>
+                          {% endif %}
 
                           {%- for property in item.properties -%}
                             {%- assign property_first_char = property.first | slice: 0 -%}
