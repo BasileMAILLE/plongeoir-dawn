@@ -17,8 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
       preorderMessage.innerText = availabilityDate;
       preorderMessage.style.display = "block";
       console.log(buyButton.innerText)
-      buyButton.innerText = preOrderButtonMessage;
-      console.log(buyButton.innerText)
+      setTimeout(() => {
+        buyButton.innerText = preOrderButtonMessage;
+        console.log(buyButton.innerText)
+      }
+      , 1);
     } else {
       preorderMessage.style.display = "none";
     }
