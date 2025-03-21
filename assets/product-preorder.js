@@ -9,17 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!variantSelectors) return;
 
   variantSelectors.addEventListener("change", function (e) {
-    console.log("variant changed");
-    if (variants_metafields[e.target.value]) {
-      let selectedVariant = variants_metafields[e.target.value];
-      let availabilityDate = selectedVariant.preorder.availability_message;
-
+    if (window.preorder_availability_message[e.target.value]) {
+      let availabilityDate = window.preorder_availability_message[e.target.value];
       preorderMessage.innerText = availabilityDate;
       preorderMessage.style.display = "block";
-      console.log(buyButton.innerText)
       setTimeout(() => {
         buyButton.innerText = preOrderButtonMessage;
-        console.log(buyButton.innerText)
       }
       , 1);
     } else {
