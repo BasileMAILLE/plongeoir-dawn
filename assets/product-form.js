@@ -124,13 +124,17 @@ if (!customElements.get('product-form')) {
         }
       }
 
-      toggleSubmitButton(disable = true, text) {
+      toggleSubmitButton(disable = true, text, preorder = false) {
         if (disable) {
           this.submitButton.setAttribute('disabled', 'disabled');
           if (text) this.submitButtonText.textContent = text;
         } else {
           this.submitButton.removeAttribute('disabled');
-          this.submitButtonText.textContent = window.variantStrings.addToCart;
+          if (preorder) {
+            this.submitButtonText.textContent = window.variantStrings.preorderButton;
+          } else {
+            this.submitButtonText.textContent = window.variantStrings.addToCart;
+          }
         }
       }
 

@@ -80,9 +80,6 @@
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
-      <script>
-        console.log('{{ preorder_test}}');
-      </script>
       {%- if is_preorder -%}
         <div class="preorder-ribbon">
           <span>{{ 'sections.collection_template.preorder-ribbon-heading' | t }}</span>

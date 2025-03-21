@@ -161,14 +161,36 @@ if (!customElements.get('product-info')) {
         }
       }
 
+      updateVariantPreorderInfo(html) {
+        const sourcePreorderInfo = html.querySelector('#preorder-message');
+        const destinationPreorderInfo = this.querySelector('#preorder-message');
+        
+        if (sourcePreorderInfo && destinationPreorderInfo) {
+          destinationPreorderInfo.innerHTML = sourcePreorderInfo.innerHTML;
+        }
+
+
+      }
+
+      updateProductFormPreorderInfo(html) {
+        const sourcePreorderInfo = html.querySelector('#product_form_preorder-data');
+        const destinationPreorderInfo = this.querySelector('#product_form_preorder-data');
+
+        if (sourcePreorderInfo && destinationPreorderInfo) {
+          destinationPreorderInfo.innerHTML = sourcePreorderInfo.innerHTML;
+        }
+      }
+
       handleUpdateProductInfo(productUrl) {
         return (html) => {
           const variant = this.getSelectedVariant(html);
+          const isPreorder = html.querySelector('[data-availability]');
 
           this.pickupAvailability?.update(variant);
           this.updateOptionValues(html);
           this.updateURL(productUrl, variant?.id);
           this.updateVariantInputs(variant?.id);
+          this.updateVariantPreorderInfo(html)
 
           if (!variant) {
             this.setUnavailable();
@@ -198,7 +220,7 @@ if (!customElements.get('product-info')) {
 
           this.productForm?.toggleSubmitButton(
             html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
-            window.variantStrings.soldOut
+            window.variantStrings.soldOut, isPreorder
           );
 
           publish(PUB_SUB_EVENTS.variantChange, {
