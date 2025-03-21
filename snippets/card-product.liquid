@@ -28,6 +28,33 @@
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {%- endunless -%}
+{%- liquid
+  assign preorder_variant_number = 0
+  for variant in card_product.variants
+    if variant.metafields.preorder.availability_date
+      assign preorder_variant_number = preorder_variant_number | plus: 1
+    endif
+  endfor
+
+  assign total_variant = card_product.variants | size
+  assign is_preorder = false
+  assign preorder_date = 0
+  if preorder_variant_number != 0 and preorder_variant_number == total_variant
+    assign is_preorder = true
+    for variant in card_product.variants
+      if variant.metafields.preorder.availability_date
+        assign curr_date = variant.metafields.preorder.availability_date | date: '%s'
+        if preorder_date == 0 or preorder_date > curr_date
+          assign preorder_date = curr_date
+        endif
+      endif
+    endfor
+    assign preorder_date = preorder_date | date: '%b %e'
+  elsif card_product.variants.first.metafields.preorder.availability_date
+    assign is_preorder = true
+    assign preorder_date = card_product.variants.first.metafields.preorder.availability_date | date: '%b %e'
+  endif
+-%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
     assign ratio = 1
@@ -53,6 +80,15 @@
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
+      <script>
+        console.log('{{ preorder_test}}');
+      </script>
+      {%- if is_preorder -%}
+        <div class="preorder-ribbon">
+          <span>{{ 'sections.collection_template.preorder-ribbon-heading' | t }}</span>
+          <span>{{ 'sections.collection_template.preorder-ribbon-date' | t: date: preorder_date }}</span>
+        </div>
+      {%- endif -%}
       <div
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"

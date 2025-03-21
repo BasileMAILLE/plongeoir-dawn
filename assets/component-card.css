@@ -48,6 +48,32 @@
   border: var(--border-width) solid rgba(var(--color-foreground), var(--border-opacity));
 }
 
+.card .preorder-ribbon {
+  position:absolute;
+  top: 1rem;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  display:flex;
+  flex-direction: column;
+  width: min-content;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.card:hover .preorder-ribbon{
+  opacity: 1;
+}
+
+.card .preorder-ribbon span {
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0 1rem;
+  width: max-content;
+  text-transform: uppercase;
+}
+
 .card--card:after,
 .card--standard .card__inner:after {
   content: '';
