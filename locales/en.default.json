@@ -43,7 +43,9 @@
       "preorder-label": "Preorder :",
       "view": "View cart ({{ count }})",
       "view_empty_cart": "View cart",
-      "item_added": "Item added to your cart"
+      "item_added": "Item added to your cart",
+      "preorder-title": "Preorder:",
+      "preorder-availability": "Shipping on {{ date }}",
     },
     "share": {
       "close": "Close share",
