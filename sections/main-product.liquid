@@ -72,23 +72,23 @@
       onload="this.media='all'"
     >
   {%- endif -%}
-    <script>
-        window.preorder_availability_date = {
-          {%- for variant in product.variants -%}
-            {%- if variant.metafields.preorder.availability_date -%}
-              "{{ variant.id }}":  "{{ variant.metafields.preorder.availability_date }}",
-            {%- endif -%}
-          {%- endfor -%}
-      };
-        window.preorder_availability_message = {
-          {%- for variant in product.variants -%}
-            {%- if variant.metafields.preorder.availability_date -%}
-              {%- assign curr_variant_avail_date = variant.metafields.preorder.availability_date | date: '%B, %d' -%}
-              "{{ variant.id }}":  "{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}",
-            {%- endif -%}
-          {%- endfor -%}
-      }
-    </script>
+  <script>
+      window.preorder_availability_date = {
+        {%- for variant in product.variants -%}
+          {%- if variant.metafields.preorder.availability_date -%}
+            "{{ variant.id }}":  "{{ variant.metafields.preorder.availability_date }}",
+          {%- endif -%}
+        {%- endfor -%}
+    };
+      window.preorder_availability_message = {
+        {%- for variant in product.variants -%}
+          {%- if variant.metafields.preorder.availability_date -%}
+            {%- assign curr_variant_avail_date = variant.metafields.preorder.availability_date | date: '%B, %d' -%}
+            "{{ variant.id }}":  "{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}",
+          {%- endif -%}
+        {%- endfor -%}
+    }
+  </script>
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
@@ -155,6 +155,12 @@
                   {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                   {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <p class="line-item-property__field">
+                      <input style="display:none;" required class="required" id="preorder-date-input-label" type="text" name="properties[{{ 'general.cart.preorder-title' | t }}]" form="{{ product_form_id }}">
+                    </p> 
+                    <p class="line-item-property__field">
+                      <input style="display:none;" required class="required" id="preorder-date-input" type="text" name="properties[_preorder-availability-date]" form="{{ product_form_id }}">
+                    </p> 
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
