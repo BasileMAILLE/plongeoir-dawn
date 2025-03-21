@@ -40,9 +40,12 @@
       "reset": "Clear search term"
     },
     "cart": {
+      "preorder-label": "Preorder :",
       "view": "View cart ({{ count }})",
       "view_empty_cart": "View cart",
-      "item_added": "Item added to your cart"
+      "item_added": "Item added to your cart",
+      "preorder-title": "Preorder",
+      "preorder-availability": "Shipping on {{ date }}",
     },
     "share": {
       "close": "Close share",
@@ -107,6 +110,8 @@
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
+      "preorder-button": "Preorder now",
+      "preorder_availability": "Shipping on {{ availability_date }}",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",
@@ -331,7 +336,9 @@
     "collection_template": {
       "empty": "No products found",
       "title": "Collection",
-      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
+      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>",
+      "preorder-ribbon-heading": "Preorder",
+      "preorder-ribbon-date": "earliest {{date}}",
     },
     "video": {
       "load_video": "Load video: {{ description }}"

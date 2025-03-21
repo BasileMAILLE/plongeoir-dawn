@@ -12,13 +12,13 @@
   "product": [],
   "variant": [
     {
-      "key": "pre_order",
-      "namespace": "custom",
-      "name": "Pre-order",
-      "description": "Is the variant available in pre-order",
+      "key": "availability_date",
+      "namespace": "preorder",
+      "name": "availability_date",
+      "description": "Expected shipping date for preorder",
       "type": {
-        "name": "boolean",
-        "category": "TRUE_FALSE"
+        "name": "date",
+        "category": "DATE_TIME"
       }
     }
   ],

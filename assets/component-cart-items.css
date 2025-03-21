@@ -40,6 +40,16 @@ cart-items .title-wrapper-with-link {
   height: auto;
   max-width: calc(10rem / var(--font-body-scale));
 }
+.cart-item .preorder p{
+  font-size: 1.4rem;
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+.cart-item .preorder span{
+  font-weight: 600;
+}
+
 
 @media screen and (min-width: 750px) {
   .cart-item__image {

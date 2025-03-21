@@ -45,6 +45,7 @@
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
+  <script src="{{ 'product-preorder.js' | asset_url }}" defer="defer"></script>
 
   {% if section.settings.image_zoom == 'hover' %}
     <script id="EnableZoomOnHover-main" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
@@ -71,6 +72,23 @@
       onload="this.media='all'"
     >
   {%- endif -%}
+  <script>
+      window.preorder_availability_date = {
+        {%- for variant in product.variants -%}
+          {%- if variant.metafields.preorder.availability_date -%}
+            "{{ variant.id }}":  "{{ variant.metafields.preorder.availability_date }}",
+          {%- endif -%}
+        {%- endfor -%}
+    };
+      window.preorder_availability_message = {
+        {%- for variant in product.variants -%}
+          {%- if variant.metafields.preorder.availability_date -%}
+            {%- assign curr_variant_avail_date = variant.metafields.preorder.availability_date | date: '%B, %d' -%}
+            "{{ variant.id }}":  "{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}",
+          {%- endif -%}
+        {%- endfor -%}
+    }
+  </script>
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
@@ -137,7 +155,12 @@
                   {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                   {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    {{ form | payment_terms }}
+                    <p class="line-item-property__field">
+                      <input style="display:none;" required class="required" id="preorder-date-input-label" type="text" name="properties[{{ 'general.cart.preorder-title' | t }}]" form="{{ product_form_id }}">
+                    </p> 
+                    <p class="line-item-property__field">
+                      <input style="display:none;" required class="required" id="preorder-date-input" type="text" name="properties[_preorder-availability-date]" form="{{ product_form_id }}">
+                    </p> 
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
@@ -356,7 +379,10 @@
                                 </dt>
                                 <dd>
                                   <span class="price-per-item--current">
-                                    {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+                                    {{-
+                                      'products.product.volume_pricing.price_at_each_html'
+                                      | t: price: variant_price
+                                    -}}
                                   </span>
                                 </dd>
                               </dl>
@@ -1674,7 +1700,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_2",
@@ -1874,7 +1900,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_3.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_3",
@@ -2176,7 +2202,7 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
-    },    
+    },
     {
       "type": "select",
       "id": "media_position",
