@@ -80,7 +80,7 @@
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
-      {%- if is_preorder -%}
+      {%- if is_preorder and card_product.available -%}
         <div class="preorder-ribbon">
           <span>{{ 'sections.collection_template.preorder-ribbon-heading' | t }}</span>
           <span>{{ 'sections.collection_template.preorder-ribbon-date' | t: date: preorder_date }}</span>

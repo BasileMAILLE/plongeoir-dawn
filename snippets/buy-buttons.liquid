@@ -94,7 +94,7 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
+          {%- if product.selected_or_first_available_variant.available and product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
             {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
               | date: '%B, %d'
             %}
