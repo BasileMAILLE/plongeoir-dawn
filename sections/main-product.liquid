@@ -137,7 +137,38 @@
                   {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                   {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    {{ form | payment_terms }}
+                    <div id="product_form_preorder-data">
+                      {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
+                        {%- assign curr_variant_avail_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
+                          | date: '%B, %d'
+                        -%}
+
+                        <p class="line-item-property__field">
+                          <input
+                            style="display:none;"
+                            required
+                            class="required"
+                            id="preorder-date-input-label"
+                            type="text"
+                            name="properties[{{ 'general.cart.preorder-title' | t }}]"
+                            form="{{ product_form_id }}"
+                            value="{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}"
+                          >
+                        </p>
+                        <p class="line-item-property__field">
+                          <input
+                            style="display:none;"
+                            required
+                            class="required"
+                            id="preorder-date-input"
+                            type="text"
+                            name="properties[_preorder-availability-date]"
+                            form="{{ product_form_id }}"
+                            value="{{ product.selected_or_first_available_variant.metafields.preorder.availability_date }}"
+                          >
+                        </p>
+                      {%- endif -%}
+                    </div>
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
@@ -356,7 +387,10 @@
                                 </dt>
                                 <dd>
                                   <span class="price-per-item--current">
-                                    {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+                                    {{-
+                                      'products.product.volume_pricing.price_at_each_html'
+                                      | t: price: variant_price
+                                    -}}
                                   </span>
                                 </dd>
                               </dl>
@@ -1674,7 +1708,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_2.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_2",
@@ -1874,7 +1908,7 @@
         {
           "type": "header",
           "content": "t:sections.main-product.blocks.icon_with_text.settings.pairing_3.label"
-        },        
+        },
         {
           "type": "select",
           "id": "icon_3",
@@ -2176,7 +2210,7 @@
       ],
       "default": "hide",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
-    },    
+    },
     {
       "type": "select",
       "id": "media_position",

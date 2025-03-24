@@ -95,11 +95,16 @@
   margin-top: 1rem;
 }
 
-.cart-notification-product {
+.cart-notification-product-wrapper {
   align-items: flex-start;
   display: flex;
+  flex-direction: column;
   padding-bottom: 3rem;
   padding-top: 2rem;
+}
+
+.cart-notification-product-content {
+  display: flex;
 }
 
 .cart-notification-product dl {
@@ -120,4 +125,18 @@
 .cart-notification-product__name {
   margin-bottom: 0.5rem;
   margin-top: 0;
+}
+
+.cart-notification-product-preorder-wrapper {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 0 .5rem;
+}
+.cart-notification-product-preorder-wrapper p{
+  margin: 0;
+  font-size: 1.25rem;
+}
+.cart-notification-product-preorder-wrapper p span{
+  font-weight: bolder;
+  margin-right: .5rem;
 }

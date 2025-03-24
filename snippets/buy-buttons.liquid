@@ -55,7 +55,6 @@
           {% endif %}
           class="product-variant-id"
         >
-
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
@@ -82,19 +81,31 @@
               disabled
             {% endif %}
           >
-            <span>
+            <span class="buy-button-text">
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
+              {% elsif product.selected_or_first_available_variant.metafields.preorder.availability_date %}
+                {{ 'products.product.preorder-button' | t }}
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
             {%- render 'loading-spinner' -%}
           </button>
-          {%- if show_dynamic_checkout -%}
-            {{ form | payment_button }}
+          {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
+            {% assign availability_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
+              | date: '%B, %d'
+            %}
+            <div
+              id="preorder-message"
+              data-availability="{{ product.selected_or_first_available_variant.metafields.preorder.availability_date }}"
+            >
+              {{ 'products.product.preorder_availability' | t: availability_date: availability_date }}
+            </div>
+          {%- else -%}
+            <div id="preorder-message" style="display:none;"></div>
           {%- endif -%}
         </div>
       {%- endform -%}
