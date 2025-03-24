@@ -162,9 +162,9 @@
             {%- elsif is_preorder -%}  
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
-                class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
+                class="badge badge--bottom-left color-{{ settings.preorder_badge_color_scheme }}"
               >
-                {{- 'sections.collection_template.preorder-ribbon-heading' | t | append: ' : Earliest ' }}{{- preorder_date -}}
+                {{- 'sections.collection_template.preorder-ribbon-heading' | t | upcase | append: ' : Earliest ' }}{{- preorder_date -}}
               </span>
             {%- elsif card_product.compare_at_price > card_product.price -%}
               <span
