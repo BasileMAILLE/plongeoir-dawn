@@ -1,5 +1,13 @@
 {
   "settings_schema": {
+    "developper": {
+      "name": "Developper",
+      "settings": {
+        "storefront_key": {
+          "label": "Storefront API key",
+        }
+      },
+    },
     "global": {
       "settings": {
         "header__border": {
@@ -105,6 +113,9 @@
         },
         "sale_badge_color_scheme": {
           "label": "Sale badge color scheme"
+        },
+        "preorder_badge_color_scheme": {
+          "label": "Preorder badge color scheme"
         },
         "sold_out_badge_color_scheme": {
           "label": "Sold out badge color scheme"

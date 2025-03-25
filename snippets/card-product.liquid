@@ -49,10 +49,10 @@
         endif
       endif
     endfor
-    assign preorder_date = preorder_date | date: '%b %e'
+    assign preorder_date = preorder_date | date: '%B %e'
   elsif card_product.variants.first.metafields.preorder.availability_date
     assign is_preorder = true
-    assign preorder_date = card_product.variants.first.metafields.preorder.availability_date | date: '%b %e'
+    assign preorder_date = card_product.variants.first.metafields.preorder.availability_date | date: '%B %e'
   endif
 -%}
 {%- if card_product and card_product != empty -%}
@@ -80,12 +80,6 @@
       "
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
-      {%- if is_preorder -%}
-        <div class="preorder-ribbon">
-          <span>{{ 'sections.collection_template.preorder-ribbon-heading' | t }}</span>
-          <span>{{ 'sections.collection_template.preorder-ribbon-date' | t: date: preorder_date }}</span>
-        </div>
-      {%- endif -%}
       <div
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
@@ -165,13 +159,21 @@
               >
                 {{- 'products.product.sold_out' | t -}}
               </span>
-            {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+            {%- elsif is_preorder -%}  
+              <span
+                id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
+                class="badge badge--bottom-left color-{{ settings.preorder_badge_color_scheme }}"
+              >
+                {{- 'sections.collection_template.preorder-ribbon-heading' | t | append: ' : earliest ' }}{{- preorder_date -}}
+              </span>
+            {%- elsif card_product.compare_at_price > card_product.price -%}
               <span
                 id="NoMediaStandardBadge-{{ section_id }}-{{ card_product.id }}"
                 class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}"
               >
                 {{- 'products.product.on_sale' | t -}}
               </span>
+              
             {%- endif -%}
           </div>
         </div>

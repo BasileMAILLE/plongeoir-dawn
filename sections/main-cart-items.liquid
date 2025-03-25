@@ -24,6 +24,7 @@
 {%- endunless -%}
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-preorder.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
@@ -138,6 +139,23 @@
                               </div>
                             {%- endfor -%}
                           {%- endif -%}
+                          {% if item.variant.metafields.preorder.availability_date %}
+                            {% assign product_availability_date = item.variant.metafields.preorder.availability_date
+                              | date: '%B %m'
+                            %}
+                            <div class="preorder callout color-blue">
+                              <span class="svg-wrapper">
+                                {{- 'icon-box.svg' | inline_asset_content -}}
+                              </span>
+                              <p class="cart-item__preorder-date">
+                                <span>{{ 'general.cart.preorder-label' | t }}</span>
+                                {{
+                                  'products.product.preorder_availability'
+                                  | t: availability_date: product_availability_date
+                                }}.
+                              </p>
+                            </div>
+                          {% endif %}
 
                           {%- for property in item.properties -%}
                             {%- assign property_first_char = property.first | slice: 0 -%}

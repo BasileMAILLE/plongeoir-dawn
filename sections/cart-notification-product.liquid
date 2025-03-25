@@ -2,6 +2,14 @@
   {%- for item in cart.items -%}
     <div id="cart-notification-product-{{ item.key }}" class="cart-item">
       <div class="cart-notification-product-wrapper">
+        {% if item.variant.metafields.preorder.availability_date %}
+          <div class="cart-notification-product-preorder-wrapper">
+            {% assign preorder_availability_date = item.variant.metafields.preorder.availability_date | date: '%B %e' %}
+            <p>
+              <span>{{ 'general.cart.preorder-title' | t }}</span> : {{ 'general.cart.preorder-availability' | t: date: preorder_availability_date }}
+            </p>
+          </div>
+        {% endif %}
         <div class="cart-notification-product-content">
           {%- if item.image -%}
             <div class="cart-notification-product__image global-media-settings">

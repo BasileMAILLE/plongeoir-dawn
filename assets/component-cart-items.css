@@ -42,8 +42,7 @@ cart-items .title-wrapper-with-link {
 }
 .cart-item .preorder p{
   font-size: 1.4rem;
-  border: 1px solid black;
-  padding: 0.5rem;
+  margin:0;
 }
 
 .cart-item .preorder span{
@@ -358,4 +357,25 @@ cart-remove-button .icon-remove {
   .cart-items .quantity-popover__info-button {
     padding-left: 0;
   }
+}
+
+.callout {
+  --callout-color: 0, 0, 0;
+  width: 100%;
+  padding: .75rem;
+  border: 1px solid rgba(var(--callout-color), .25);
+  background-color: rgba(var(--callout-color), .2);
+  color: rgba(var(--callout-color));
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.callout svg {
+  fill: rgb(var(--callout-color));
+}
+
+.callout.color-blue {
+  --callout-color: 115, 115, 244;
 }

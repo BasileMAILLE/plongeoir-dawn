@@ -1492,3 +1492,23 @@ a.product__text {
     border: none;
   }
 }
+
+.callout {
+  --callout-color: 0, 0, 0;
+  width: 100%;
+  padding: .75rem 2rem;
+  border: 1px solid rgba(var(--callout-color), .25);
+  background-color: rgba(var(--callout-color), .2);
+  color: rgba(var(--callout-color));
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.callout svg {
+  fill: rgb(var(--callout-color));
+}
+
+.callout.color-blue {
+  --callout-color: 115, 115, 244;
+}

@@ -137,38 +137,6 @@
                   {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                   {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <div id="product_form_preorder-data">
-                      {%- if product.selected_or_first_available_variant.metafields.preorder.availability_date -%}
-                        {%- assign curr_variant_avail_date = product.selected_or_first_available_variant.metafields.preorder.availability_date
-                          | date: '%B, %d'
-                        -%}
-
-                        <p class="line-item-property__field">
-                          <input
-                            style="display:none;"
-                            required
-                            class="required"
-                            id="preorder-date-input-label"
-                            type="text"
-                            name="properties[{{ 'general.cart.preorder-title' | t }}]"
-                            form="{{ product_form_id }}"
-                            value="{{ 'products.product.preorder_availability' | t: availability_date: curr_variant_avail_date }}"
-                          >
-                        </p>
-                        <p class="line-item-property__field">
-                          <input
-                            style="display:none;"
-                            required
-                            class="required"
-                            id="preorder-date-input"
-                            type="text"
-                            name="properties[_preorder-availability-date]"
-                            form="{{ product_form_id }}"
-                            value="{{ product.selected_or_first_available_variant.metafields.preorder.availability_date }}"
-                          >
-                        </p>
-                      {%- endif -%}
-                    </div>
                   {%- endform -%}
                 </div>
               {%- when 'inventory' -%}
