@@ -1,5 +1,13 @@
 {
   "settings_schema": {
+    "developper": {
+      "name": "Developper",
+      "settings": {
+        "storefront_key": {
+          "label": "Storefront API key",
+        }
+      },
+    },
     "global": {
       "settings": {
         "header__border": {

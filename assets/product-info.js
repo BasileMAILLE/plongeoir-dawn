@@ -168,17 +168,6 @@ if (!customElements.get('product-info')) {
         if (sourcePreorderInfo && destinationPreorderInfo) {
           destinationPreorderInfo.innerHTML = sourcePreorderInfo.innerHTML;
         }
-
-
-      }
-
-      updateProductFormPreorderInfo(html) {
-        const sourcePreorderInfo = html.querySelector('#product_form_preorder-data');
-        const destinationPreorderInfo = this.querySelector('#product_form_preorder-data');
-
-        if (sourcePreorderInfo && destinationPreorderInfo) {
-          destinationPreorderInfo.innerHTML = sourcePreorderInfo.innerHTML;
-        }
       }
 
       handleUpdateProductInfo(productUrl) {
